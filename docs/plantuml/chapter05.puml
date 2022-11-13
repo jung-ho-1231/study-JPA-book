@@ -1,0 +1,41 @@
+@startuml
+
+object "Member" as m {
+    id: Long
+    name: String
+    city: String
+    street: String
+    zipcode: String
+    orders: List
+}
+
+object "Order" as o {
+    id: Long
+    member: Member
+    orderItems : List
+    orderDate : Date
+    status: OrderStatus
+}
+
+object "OrderItem" as oi {
+    id: Long
+    item: Item
+    order: Order
+    orderPrice: int
+    count: int
+}
+
+object "Item" as i {
+    id: Long
+    name:String
+    price: int
+    stockQuantity:int
+}
+
+m "1" -down- "*" o
+
+o "1" -right- "*" oi
+
+oi "*" -right- "1" i
+
+@enduml
